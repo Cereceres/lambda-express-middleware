@@ -1,0 +1,29 @@
+{
+  "name": "lambda-express-middleware",
+  "version": "1.0.0",
+  "description": "express middleware to lambda functions from aws",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cereceres/lambda-express-middleware.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "express",
+    "microservices",
+    "middleware"
+  ],
+  "author": "Jesus Cereceres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cereceres/lambda-express-middleware/issues"
+  },
+  "homepage": "https://github.com/Cereceres/lambda-express-middleware#readme",
+  "dependencies": {
+    "aws-sdk": "^2.286.2"
+  }
+}
