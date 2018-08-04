@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const lambdaDefault = new AWS.Lambda();
-module.exports = (lambdaParams, lambda = lambdaDefault) => {
+module.exports = (lambdaParams = {}, lambda = lambdaDefault) => {
     const {
         FunctionName,
         InvocationType = 'RequestResponse',
@@ -34,7 +34,6 @@ module.exports = (lambdaParams, lambda = lambdaDefault) => {
             .invoke(options)
             .promise()
             .then((data) => {
-                console.log('data ', data);
                 if (data.FunctionError) return next(data.LogResult);
 
                 res

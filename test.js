@@ -156,7 +156,6 @@ describe('test to get middleware', () => {
             }
         };
         middleware(req, res, (err) => {
-            console.log('err ', err);
             assert(err === 'LogResults');
             done();
         });
