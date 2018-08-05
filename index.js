@@ -36,9 +36,11 @@ module.exports = (lambdaParams = {}, lambda = lambdaDefault) => {
             .then((data) => {
                 if (data.FunctionError) return next(data.LogResult);
 
-                res
-                    .status(data.StatusCode)
-                    .send(data.Payload);
+                res[`lambda${
+                    FunctionName[0].toUpperCase() + FunctionName.slice(1)
+                }Response`] = data;
+
+                next()
             })
             .catch(next);
     };

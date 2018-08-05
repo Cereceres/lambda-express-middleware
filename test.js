@@ -51,7 +51,12 @@ describe('test to get middleware', () => {
                 if (called) done();
             }
         };
-        middleware(req, res, (err) => assert(err));
+        middleware(req, res, (err) => {
+            assert(!err)
+            res
+                .status(res.lambdaFunctionNameResponse.StatusCode)
+                .send(res.lambdaFunctionNameResponse.Payload)
+        });
     });
 
     it('should return a express middleware', (done) => {
@@ -101,8 +106,8 @@ describe('test to get middleware', () => {
             }
         };
         middleware(req, res, (err) => {
-            assert(err === 'error');
-            done();
+            assert(err === 'error')
+            done()
         });
     });
 
