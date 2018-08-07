@@ -16,3 +16,19 @@ lambda middleware to express
     LogType = 'Tail'
 }
 ```
+
+# Usage
+
+```js
+app.use(
+// other middleware
+getMiddleware({
+    FunctionName: 'FunctionName',
+    InvocationType : 'InvocationType',
+    Qualifier: 'Qualifier',
+    LogType: 'LogType'
+})
+// middleware to manage the lambda response
+// res.lambdaFunctionNameResponse is response from lambda
+)
+```

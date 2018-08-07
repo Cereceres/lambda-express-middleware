@@ -52,10 +52,10 @@ describe('test to get middleware', () => {
             }
         };
         middleware(req, res, (err) => {
-            assert(!err)
+            assert(!err);
             res
                 .status(res.lambdaFunctionNameResponse.StatusCode)
-                .send(res.lambdaFunctionNameResponse.Payload)
+                .send(res.lambdaFunctionNameResponse.Payload);
         });
     });
 
@@ -106,8 +106,8 @@ describe('test to get middleware', () => {
             }
         };
         middleware(req, res, (err) => {
-            assert(err === 'error')
-            done()
+            assert(err === 'error');
+            done();
         });
     });
 
@@ -161,7 +161,7 @@ describe('test to get middleware', () => {
             }
         };
         middleware(req, res, (err) => {
-            assert(err === 'LogResults');
+            assert(err.message === 'LogResults');
             done();
         });
     });

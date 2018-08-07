@@ -1,6 +1,6 @@
 {
   "name": "lambda-express-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "express middleware to lambda functions from aws",
   "main": "index.js",
   "scripts": {

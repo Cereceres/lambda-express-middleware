@@ -1,18 +1,11 @@
 const AWS = require('aws-sdk');
 const lambdaDefault = new AWS.Lambda();
+
+const invoke = require('./lib/invoke-lambda');
+const getOptions = require('./lib/get-options');
+const attachPayload = require('./lib/attach-payload');
 module.exports = (lambdaParams = {}, lambda = lambdaDefault) => {
-    const {
-        FunctionName,
-        InvocationType = 'RequestResponse',
-        Qualifier = '$LATEST',
-        LogType = 'Tail'
-    } = lambdaParams;
-    const options = {
-        FunctionName,
-        InvocationType,
-        LogType,
-        Qualifier
-    };
+    const options = getOptions(lambdaParams);
 
     return (req, res, next) => {
         const {
@@ -23,25 +16,16 @@ module.exports = (lambdaParams = {}, lambda = lambdaDefault) => {
             body
         } = req;
 
-        options.Payload = JSON.stringify({
+        const Payload = JSON.stringify({
             method,
             params,
             query,
             headers,
             body
         });
-        return lambda
-            .invoke(options)
-            .promise()
-            .then((data) => {
-                if (data.FunctionError) return next(data.LogResult);
-
-                res[`lambda${
-                    FunctionName[0].toUpperCase() + FunctionName.slice(1)
-                }Response`] = data;
-
-                next()
-            })
+        attachPayload(options, Payload);
+        return invoke(options, lambda, res, next)
+            .then(() => next())
             .catch(next);
     };
 };
